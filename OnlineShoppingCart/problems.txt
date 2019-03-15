@@ -1,0 +1,20 @@
+
+
+problem1: 
+	java.sql.SQLException: ORA-00604: error occurred at recursive SQL level 1 ORA-00018: maximum number of sessions exceeded
+
+
+Problem2: 
+	java.sql.SQLException: Closed Connection
+
+
+Problem3:
+	java.sql.SQLException: Listener refused the connection with the following error: ORA-12519, 
+	TNS:no appropriate service handler found The Connection descriptor used by the client was: localhost:1521:XE
+
+
+problem4:
+	java.sql.SQLException: Listener refused the connection with the following error: ORA-12519, 
+	TNS:no appropriate service handler found The Connection descriptor used by the client was: localhost:1521:XE 
+	java.sql.SQLException: Closed Connection
+

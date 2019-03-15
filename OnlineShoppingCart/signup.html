@@ -1,0 +1,71 @@
+<html>
+<head><center>
+	<script language="javascript">
+		function passcheck()
+		{
+			var pvalue=document.getElementById("pass").value;
+			var l=pvalue.length;
+			if(l<6)
+				document.getElementById("pass_show").innerHTML="<font color=red>****</font>";
+			else if(l<10)
+				document.getElementById("pass_show").innerHTML="<font color=yellow>**** ****</font>";
+			else	
+				document.getElementById("pass_show").innerHTML="<font color=green>**** **** ****</font>";
+		}
+		
+		function f110(sid)
+		{
+			xmlHttp=GetXmlHttpObject()
+			var url="check_USERID.jsp?sid="+sid
+			xmlHttp.onreadystatechange=stateChanged1 
+			xmlHttp.open("GET",url,true)
+			xmlHttp.send(null)   
+		}
+		function stateChanged1() 
+		{ 
+			var showdata=xmlHttp.responseText;
+			document.getElementById("sidchk1").innerHTML=showdata;	
+		}
+		function GetXmlHttpObject()
+		{
+			var xmlHttp=null;
+			try{ xmlHttp=new XMLHttpRequest();	}
+			catch (e){
+				try{	xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");	}
+				catch (e){	xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");	}
+			}
+			return xmlHttp;
+		}
+	</script>
+</head>
+
+	<body bgcolor="cyan">
+	<center><br><br>
+		<img src="http://192.168.225.164:12345/jumca28/assignment5/img/logo2.png" width="200" heigth="2000"/>
+		<h1> Coustomar Sign Up </h1>
+	</center>
+		<form action="signup.jsp" method=post>
+	<style type="text/css">
+		 table    {border:outset 1; width:10%; height:200px;}
+		 table td {border:inset 10;}
+		 table          {border:ridge 7px red;}
+		 table td       {border:inset 8px #000;}
+		 table tr  {background-color:Black; color:White;}
+	</style>
+		<table border=0>
+		<h3>
+			<tr><td>Mail ID<font color=red>*</font></td><td><input type=text name=uid onchange="f110(this.value)"><div id="sidchk1"></div> </td></tr><br>
+			<tr><td>Password<font color=red>*</font></td>
+				<td><input type=password name="pass" id="pass" onkeyup="passcheck()"><div id="pass_show"></div></td>
+			</tr><br>
+			<tr><td>Name</td><td>	<input type=text name=nm></td></tr><br>
+			<tr><td>DOB<font color=red>*</font></td><td>	<input type=date name=dob></td></tr><br>
+			<tr><td>Address</td><td>	<textarea row=2 cols=20 name=addr> </textarea></td></tr><br>
+			<tr><td>ZIP Code</td><td>	<input type=number name=pincode placeholder="Delivery Pin Code"></td></tr><br>
+			<tr><td>Phone Number<font color=red>*</font></td><td>	<input type=number name=phno placeholder="  Phone Number"></td></tr>
+			<tr></tr>
+				<tr><td><input type=reset value=reset>	</td><td>	<input type=submit value=submit></td></tr>
+		</h3></table>
+		
+	</form></body>
+</html>

@@ -1,0 +1,108 @@
+<html>
+<head>
+<script language="javascript">
+	/*ajax helping function*/
+	function GetXmlHttpObject()
+	{
+		var xmlHttp=null;
+		try{ xmlHttp=new XMLHttpRequest();	}
+		catch (e){
+			try{	xmlHttp=new ActiveXObject("Msxml2.XMLHTTP");	}
+			catch (e){	xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");	}
+		}
+		return xmlHttp;
+	}
+	/*first ajax */
+	function f11(sid)
+	{
+		xmlHttp=GetXmlHttpObject()
+		var url="check_ISBN10.jsp?sid="+sid
+		xmlHttp.onreadystatechange=stateChanged1 
+		xmlHttp.open("GET",url,true)
+		xmlHttp.send(null)   
+	}
+	function stateChanged1() 
+	{ 
+		var showdata=xmlHttp.responseText;
+		document.getElementById("sidchk1").innerHTML=showdata;	
+	}
+	/*second ajax */
+	function f12(sid)
+	{
+		xmlHttp=GetXmlHttpObject()
+		var url="check_ISBN13.jsp?sid="+sid
+		xmlHttp.onreadystatechange=stateChanged2 
+		xmlHttp.open("GET",url,true)
+		xmlHttp.send(null)   
+	}
+	function stateChanged2() 
+	{ 
+		var showdata=xmlHttp.responseText;
+		document.getElementById("sidchk2").innerHTML=showdata;	
+	}
+	
+</script>
+</head>
+<body><center>
+	<style type="text/css">
+		 table    {border:outset 1; width:10%; height:200px;}
+		 table td {border:inset 10;}
+		 table          {border:ridge 5px red;}
+		 table td       {border:inset 20px #000;}
+		 table tr  {background-color:Black; color:White;}
+	</style>
+	<table border=1 table=>
+		<tr><td>ISBN10 No	</td>
+			<td><input type=text name=ISBN10 placeholder="10 alphanumeric no" onchange="f11(this.value)"><div id="sidchk1"></div>		</td><td></td>
+			<td>ISBN13 NO	</td>
+			<td><input type=text name=ISBN13 placeholder="13 alphanumeric no" onchange="f12(this.value)"><div id="sidchk2"></div>		</td>
+		</tr><br>
+				
+		<tr><td>BOOK TITLE	</td><td><input type=text name=book_name ></td><td></td>
+			<td>PUBLISHERS	</td><td><input type=text name=pub ></td>
+		</tr><br>
+		
+		<tr><td>AUTHOR		</td><td><input type=text name=author></td><td></td>
+			<td>EDITION		</td><td><input type=month name=edition></td>
+		</tr><br>
+		
+		<tr><td>LANGUAGE	</td>
+				<td><select name=language>	
+					<option value=English>English</option>
+					<option value=Bengali>Bengali</option>
+					<option value=Hindi>Hindi</option>
+					<option value=Sanskrit>Sanskrit</option>
+					<option value=Urdhu>Urdhu</option>
+					<option value=Arbic>Arbic</option>
+				</select></td><td></td>
+			<td>PRICE		</td><td><input type=number name=price placeholder="			INR"></td>
+		</tr><br>
+		
+		<tr><td>DIMENSION	</td><td>	<input type=number name=len placeholder="	length		cm	"> 
+										<input type=number name=wid placeholder="	width		cm	"> 
+										<input type=number name=hei placeholder="	height		cm	"> </td><td></td>
+			<td>Categories	<br>Sub Categories</td>
+			<td><select name=category>	
+					<option></option>
+					<option value="Computer Science">Computer Science</option>
+					<option value=Mathematics>Mathematics</option>
+					<option value=Physics>Physics</option>
+					<option value=Chemestry>Chemestry</option>
+					<option value=English_literature>Civil Engg</option>
+					<option value=English_literature>Electrical Engg</option>
+					<option value=Bengali_literature>Bengali literature</option>
+					<option value=English_literature>English literature</option>
+					<option value=English_literature>English Story Book</option>
+					<option value=English_literature>Bengali Story Book</option>
+					<option valie=Biography>Biography</option>
+					
+				</select><br>
+			<input type=text name=sub_category></td>
+		</tr>
+		<tr>
+			<td>Cover Image:</td><td>	<input type=file name="cover_path"></td>
+			<td></td><td><input type=reset value=reset><br><br></td><td><h1> Book Details</h1></td>
+		</tr>
+		</table><br><br>	
+	</center>
+	</html></body>
