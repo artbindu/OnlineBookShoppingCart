@@ -975,81 +975,22 @@ http://localhost:12345/onlinebookshoppingcart/OnlineShoppingCart/administrator/i
 Error: ORA-00604: error occurred at recursive SQL level 1
        ORA-00018: maximum number of sessions exceeded
 ```
-
-**Cause**: Too many concurrent database connections  
-**Solution**:
-```sql
--- Check current sessions
-SELECT COUNT(*) FROM v$session;
-
--- Increase session limit
-ALTER SYSTEM SET SESSIONS=500 SCOPE=SPFILE;
-ALTER SYSTEM SET PROCESSES=400 SCOPE=SPFILE;
-
--- Restart Oracle Database
-shutdown immediate
-startup
-```
-
 ### Issue 2: Closed Connection
 ```
 Error: java.sql.SQLException: Closed Connection
 ```
-
-**Cause**: Connection not properly managed  
-**Solution**:
-- Implement connection pooling (Apache Commons DBCP)
-- Ensure connections are closed in finally blocks
-- Use try-with-resources for auto-closing
-
-```jsp
-try (Connection con = DriverManager.getConnection(url, user, pass);
-     Statement stmt = con.createStatement()) {
-    // Use connection
-} catch (SQLException e) {
-    // Handle exception
-}
-```
-
 ### Issue 3: TNS Service Handler Not Found
 ```
 Error: ORA-12519, TNS: no appropriate service handler found
 ```
-
-**Cause**: Connection pool exhausted  
-**Solution**:
-```sql
--- Check processes limit
-SHOW PARAMETER PROCESSES;
-
--- Increase processes
-ALTER SYSTEM SET PROCESSES=200 SCOPE=SPFILE;
-
--- Restart database
-```
-
 ### Issue 4: Tomcat Port Already in Use
 ```
 Error: Address already in use: bind
 ```
-
-**Solution**:
-- Change port in `server.xml`
-- Or kill process using the port:
-```cmd
-netstat -ano | findstr :12345
-taskkill /PID <process_id> /F
-```
-
 ### Issue 5: JDBC Driver Not Found
 ```
 Error: java.lang.ClassNotFoundException: oracle.jdbc.OracleDriver
 ```
-
-**Solution**:
-- Download `ojdbc.jar`
-- Place in `Tomcat/lib/` or `WEB-INF/lib/`
-- Restart Tomcat
 
 ### Performance Optimization
 
@@ -1120,81 +1061,23 @@ CREATE INDEX idx_order_userid ON ARTBINDU_ORDERDETAILS(USER_ID);
 
 ### Testing Checklist
 
-- [ ] User registration with valid data
-- [ ] User login with correct credentials
-- [ ] Search functionality
-- [ ] Add to cart
-- [ ] Add to wishlist
-- [ ] Card payment processing
-- [ ] Wallet payment processing
-- [ ] Order creation
-- [ ] Premium membership activation
-- [ ] Admin login
-- [ ] Admin add book
-- [ ] ISBN validation
-- [ ] Session timeout handling
-- [ ] Error message display
-- [ ] Database connection handling
+- [x] User registration with valid data
+- [x] User login with correct credentials
+- [x] Search functionality
+- [x] Add to cart
+- [x] Add to wishlist
+- [x] Card payment processing
+- [x] Wallet payment processing
+- [x] Order creation
+- [x] Premium membership activation
+- [x] Admin login
+- [x] Admin add book
+- [x] ISBN validation
+- [x] Session timeout handling
+- [x] Error message display
+- [x] Database connection handling
 
----
 
-## Future Enhancements
-
-### Recommended Features
-1. **User Reviews & Ratings**
-   - Allow users to rate and review books
-   - Display average ratings
-
-2. **Email Notifications**
-   - Order confirmation emails
-   - Shipping updates
-   - Password reset emails
-
-3. **Advanced Search**
-   - Filter by author, price range, category
-   - Sort by price, rating, popularity
-
-4. **Recommendation Engine**
-   - Based on purchase history
-   - Similar books suggestions
-
-5. **Coupon System**
-   - Discount codes
-   - Promotional offers
-
-6. **Order Tracking**
-   - Real-time order status
-   - Shipment tracking integration
-
-7. **Multiple Addresses**
-   - Save multiple delivery addresses
-   - Select address during checkout
-
-8. **Book Availability**
-   - Stock management
-   - Out of stock notifications
-
-9. **Social Login**
-   - Google OAuth
-   - Facebook Login
-
-10. **Mobile Responsive Design**
-    - Bootstrap framework
-    - Mobile-friendly UI
-
-### Technical Improvements
-- Migrate from JSP to Spring Boot
-- Implement REST APIs
-- Add React/Angular frontend
-- Use connection pooling (HikariCP)
-- Implement caching (Redis)
-- Add logging framework (Log4j)
-- Unit testing (JUnit)
-- Integration testing
-- CI/CD pipeline
-- Docker containerization
-
----
 
 ## Contact & Support
 
@@ -1202,6 +1085,6 @@ CREATE INDEX idx_order_userid ON ARTBINDU_ORDERDETAILS(USER_ID);
 **Repository**: OnlineBookShoppingCart  
 **Technology**: JSP, Oracle DB, Apache Tomcat
 
-For issues and feature requests, refer to the repository issue tracker.
+It's generated for Rebaca Tech. Pvt. Ltd. Interview within 1.5 weeks.
 
 ---
